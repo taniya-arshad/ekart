@@ -138,6 +138,7 @@ public class OrderService {
                         nextStatus
                 );
     }
+    ```java
     public void cancelOrder(int orderId) {
 
         String currentStatus =
@@ -145,10 +146,34 @@ public class OrderService {
                         orderId
                 );
 
-        if ("PLACED".equals(currentStatus)) {
+        if ("PLACED".equals(currentStatus)
+                || "SHIPPED".equals(currentStatus)) {
+
+            List<OrderItemResponse> items =
+                    orderRepository.getOrderItemsByOrderId(
+                            orderId
+                    );
+
+            for (OrderItemResponse item : items) {
+
+                Product product =
+                        productRepository.getProductById(
+                                item.getProductId()
+                        );
+
+                int newQuantity =
+                        product.getQuantity()
+                                + item.getQuantity();
+
+                productRepository.updateQuantity(
+                        product.getId(),
+                        newQuantity
+                );
+            }
 
             orderRepository.updateOrderStatus(
-                    orderId,"CANCELLED"
+                    orderId,
+                    "CANCELLED"
             );
 
         } else {
