@@ -1,0 +1,46 @@
+/* Full page container */
+.page-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color);
+}
+
+/* Card container (center box) */
+
+.card {
+  background-color: var(--white);
+  padding: 40px;
+  border-radius: var(--radius-large);
+  box-shadow: var(--card-shadow);
+  width: 350px;
+
+  display: flex;
+  flex-direction: column;
+}
+.success-message {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #81c784;
+  box-sizing: border-box;
+}
+
+.error-message {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+  box-sizing: border-box;
+}

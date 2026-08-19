@@ -1,0 +1,77 @@
+.address-container {
+  width: 700px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+.address-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.address-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.add-address-btn {
+  width: 100%;
+  padding: 12px;
+  background: white;
+  border: 2px dashed #2f2c69;
+  color: #2f2c69;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+.add-address-btn:hover {
+  background: #f8f8ff;
+}
+
+.selected-address-card {
+  background: #f9f9f9;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  padding: 18px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
+.selected-address-card p {
+  margin: 8px 0;
+}
+
+.place-order-btn {
+  width: 100%;
+  padding: 14px;
+  background: #2f2c69;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.place-order-btn:hover {
+  opacity: 0.95;
+}
+
+.success-message {
+  width: 700px;
+  margin: 20px auto;
+  padding: 15px;
+  background: #dff0df;
+  color: #1e6b1e;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 500;
+}

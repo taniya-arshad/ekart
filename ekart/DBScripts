@@ -1,0 +1,228 @@
+CREATE DATABASE ekart;
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(255),
+    role VARCHAR(20) DEFAULT 'USER'
+);
+ALTER TABLE users 
+ADD COLUMN created_at DATETIME DEFAULT CURRENT_TIMESTAMP;
+
+    ALTER TABLE users
+    ADD COLUMN last_login DATETIME;
+
+
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price DOUBLE NOT NULL,
+    category VARCHAR(100),
+    brand VARCHAR(100),
+    rating DOUBLE DEFAULT 0,
+    quantity INT DEFAULT 0,
+    image VARCHAR(500),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    total_amount DOUBLE,
+    status VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    price DOUBLE,
+
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+CREATE TABLE cart (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+for now only 
+INSERT INTO products (name, description, price, category, brand, rating, quantity, image) VALUES
+
+-- Electronics
+('iPhone 15', 'Latest Apple smartphone', 79999, 'Electronics', 'Apple', 4.5, 10, 'https://via.placeholder.com/200'),
+('Samsung TV', '50 inch Smart TV', 45999, 'Electronics', 'Samsung', 4.3, 8, 'https://via.placeholder.com/200'),
+('Dell Laptop', 'Gaming laptop', 65999, 'Electronics', 'Dell', 4.4, 5, 'https://via.placeholder.com/200'),
+
+-- Fashion
+('Nike Shoes', 'Running shoes', 2999, 'Fashion', 'Nike', 4.2, 20, 'https://via.placeholder.com/200'),
+('Levis Jeans', 'Slim fit jeans', 1999, 'Fashion', 'Levis', 4.1, 15, 'https://via.placeholder.com/200'),
+
+-- Home
+('Sofa Set', 'Comfortable 3-seater sofa', 15999, 'Home', 'Urban Ladder', 4.3, 3, 'https://via.placeholder.com/200'),
+('Dining Table', 'Wooden dining table', 8999, 'Home', 'IKEA', 4.0, 4, 'https://via.placeholder.com/200'),
+
+-- Appliances
+('Refrigerator', 'Double door fridge', 25999, 'Appliances', 'LG', 4.5, 6, 'https://via.placeholder.com/200'),
+('Washing Machine', 'Fully automatic', 18999, 'Appliances', 'Whirlpool', 4.2, 7, 'https://via.placeholder.com/200'),
+
+-- Beauty
+('Face Wash', 'Skin care product', 299, 'Beauty', 'Nivea', 4.1, 30, 'https://via.placeholder.com/200'),
+('Perfume', 'Long lasting fragrance', 1499, 'Beauty', 'Wild Stone', 4.0, 25, 'https://via.placeholder.com/200'),
+
+-- Books
+('Java Programming', 'Learn Java', 499, 'Books', 'Oracle Press', 4.5, 10, 'https://via.placeholder.com/200'),
+('React Guide', 'Frontend development', 399, 'Books', 'Tech Books', 4.3, 12, 'https://via.placeholder.com/200');
+
+INSERT INTO products
+(name, description, price, category, brand, rating, quantity, image)
+VALUES
+
+-- Electronics
+('iPad Air', 'Apple tablet device', 59999, 'Electronics', 'Apple', 4.5, 10, 'https://via.placeholder.com/200'),
+('Sony Headphones', 'Noise cancelling headphones', 8999, 'Electronics', 'Sony', 4.4, 15, 'https://via.placeholder.com/200'),
+('Canon Camera', 'DSLR camera', 45999, 'Electronics', 'Canon', 4.6, 5, 'https://via.placeholder.com/200'),
+('Mi Smart Watch', 'Fitness smartwatch', 4999, 'Electronics', 'Xiaomi', 4.2, 20, 'https://via.placeholder.com/200'),
+('Boat Earbuds', 'Wireless earbuds', 1999, 'Electronics', 'Boat', 4.1, 30, 'https://via.placeholder.com/200'),
+('Asus Monitor', '24 inch LED monitor', 10999, 'Electronics', 'Asus', 4.3, 12, 'https://via.placeholder.com/200'),
+('Lenovo Tablet', 'Android tablet', 14999, 'Electronics', 'Lenovo', 4.0, 9, 'https://via.placeholder.com/200'),
+('Gaming Keyboard', 'Mechanical keyboard', 3499, 'Electronics', 'Redgear', 4.4, 18, 'https://via.placeholder.com/200'),
+('Logitech Mouse', 'Wireless mouse', 1299, 'Electronics', 'Logitech', 4.5, 25, 'https://via.placeholder.com/200'),
+('Samsung Galaxy S24', 'Flagship smartphone', 84999, 'Electronics', 'Samsung', 4.7, 7, 'https://via.placeholder.com/200'),
+
+-- Books
+('Python Basics', 'Learn Python programming', 599, 'Books', 'Tech Press', 4.4, 15, 'https://via.placeholder.com/200'),
+('Spring Boot Guide', 'Backend development', 699, 'Books', 'Code Books', 4.5, 10, 'https://via.placeholder.com/200'),
+('Data Structures', 'DSA concepts', 799, 'Books', 'Pearson', 4.6, 12, 'https://via.placeholder.com/200'),
+('Machine Learning', 'AI concepts', 999, 'Books', 'OReilly', 4.7, 8, 'https://via.placeholder.com/200'),
+('Clean Code', 'Programming practices', 899, 'Books', 'Robert Martin', 4.8, 9, 'https://via.placeholder.com/200'),
+('React Advanced', 'Frontend patterns', 749, 'Books', 'Frontend Masters', 4.3, 13, 'https://via.placeholder.com/200'),
+('SQL Mastery', 'Database concepts', 499, 'Books', 'DBA Press', 4.1, 20, 'https://via.placeholder.com/200'),
+('Java Interview', 'Interview preparation', 399, 'Books', 'Career Books', 4.2, 16, 'https://via.placeholder.com/200'),
+('Networking Basics', 'Computer networking', 650, 'Books', 'Cisco Press', 4.0, 11, 'https://via.placeholder.com/200'),
+('Linux Essentials', 'Linux administration', 720, 'Books', 'OpenSource Books', 4.4, 14, 'https://via.placeholder.com/200'),
+
+-- Boys Fashion
+('Boys T-Shirt', 'Cotton t-shirt', 599, 'Boys'' Fashion', 'H&M', 4.1, 20, 'https://via.placeholder.com/200'),
+('Boys Jeans', 'Regular fit jeans', 1299, 'Boys'' Fashion', 'Levis', 4.3, 15, 'https://via.placeholder.com/200'),
+('Boys Sneakers', 'Casual sneakers', 1799, 'Boys'' Fashion', 'Nike', 4.4, 18, 'https://via.placeholder.com/200'),
+('Boys Hoodie', 'Winter hoodie', 1499, 'Boys'' Fashion', 'Puma', 4.2, 17, 'https://via.placeholder.com/200'),
+('Boys Jacket', 'Stylish jacket', 2499, 'Boys'' Fashion', 'Roadster', 4.5, 10, 'https://via.placeholder.com/200'),
+('Boys Shorts', 'Sports shorts', 799, 'Boys'' Fashion', 'Adidas', 4.0, 22, 'https://via.placeholder.com/200'),
+('Boys Cap', 'Baseball cap', 399, 'Boys'' Fashion', 'HRX', 4.1, 25, 'https://via.placeholder.com/200'),
+('Boys Socks', 'Cotton socks', 199, 'Boys'' Fashion', 'Puma', 4.0, 40, 'https://via.placeholder.com/200'),
+('Boys Sandals', 'Comfort sandals', 699, 'Boys'' Fashion', 'Bata', 4.2, 19, 'https://via.placeholder.com/200'),
+('Boys Watch', 'Digital watch', 999, 'Boys'' Fashion', 'Titan', 4.3, 13, 'https://via.placeholder.com/200'),
+
+-- Computers
+('MacBook Pro', 'Apple laptop', 159999, 'Computers', 'Apple', 4.8, 5, 'https://via.placeholder.com/200'),
+('Dell Inspiron', 'Business laptop', 55999, 'Computers', 'Dell', 4.3, 8, 'https://via.placeholder.com/200'),
+('HP Pavilion', 'Student laptop', 48999, 'Computers', 'HP', 4.2, 10, 'https://via.placeholder.com/200'),
+('Asus ROG', 'Gaming laptop', 99999, 'Computers', 'Asus', 4.6, 4, 'https://via.placeholder.com/200'),
+('Acer Aspire', 'Affordable laptop', 39999, 'Computers', 'Acer', 4.1, 11, 'https://via.placeholder.com/200'),
+('Lenovo ThinkPad', 'Office laptop', 68999, 'Computers', 'Lenovo', 4.5, 7, 'https://via.placeholder.com/200'),
+('LG Monitor', '27 inch monitor', 14999, 'Computers', 'LG', 4.4, 12, 'https://via.placeholder.com/200'),
+('Gaming CPU', 'Custom gaming PC', 74999, 'Computers', 'MSI', 4.5, 6, 'https://via.placeholder.com/200'),
+('Mechanical Keyboard', 'RGB keyboard', 3499, 'Computers', 'Corsair', 4.3, 16, 'https://via.placeholder.com/200'),
+('Gaming Mouse', 'Wireless gaming mouse', 2499, 'Computers', 'Logitech', 4.4, 18, 'https://via.placeholder.com/200');
+
+INSERT INTO products
+(name, description, price, category, brand, rating, quantity, image)
+VALUES
+
+-- Deals
+('Discount Combo Pack', 'Special offer combo', 999, 'Deals', 'Amazon', 4.1, 25, 'https://via.placeholder.com/200'),
+('Festival Offer TV', 'Discounted smart TV', 29999, 'Deals', 'Samsung', 4.4, 8, 'https://via.placeholder.com/200'),
+('Budget Smartphone', 'Affordable smartphone', 7999, 'Deals', 'Realme', 4.0, 18, 'https://via.placeholder.com/200'),
+('Gaming Bundle', 'Gaming accessories pack', 4999, 'Deals', 'Redgear', 4.2, 10, 'https://via.placeholder.com/200'),
+('Kitchen Combo', 'Kitchen essentials set', 2499, 'Deals', 'Prestige', 4.3, 12, 'https://via.placeholder.com/200'),
+('Fitness Combo', 'Workout combo offer', 1999, 'Deals', 'Puma', 4.1, 14, 'https://via.placeholder.com/200'),
+('Fashion Sale Shirt', 'Discounted fashion shirt', 699, 'Deals', 'Roadster', 4.0, 30, 'https://via.placeholder.com/200'),
+('Bluetooth Combo', 'Wireless audio combo', 2999, 'Deals', 'Boat', 4.4, 15, 'https://via.placeholder.com/200'),
+('Laptop Deal', 'Limited laptop offer', 45999, 'Deals', 'HP', 4.5, 5, 'https://via.placeholder.com/200'),
+('Smartwatch Sale', 'Smartwatch deal', 2499, 'Deals', 'Noise', 4.2, 20, 'https://via.placeholder.com/200'),
+
+-- Digital Music
+('JBL Speaker', 'Portable speaker', 2999, 'Digital Music', 'JBL', 4.5, 16, 'https://via.placeholder.com/200'),
+('Sony Earbuds', 'Wireless earbuds', 4999, 'Digital Music', 'Sony', 4.4, 11, 'https://via.placeholder.com/200'),
+('Boat Headphones', 'Bass boosted headphones', 1999, 'Digital Music', 'Boat', 4.1, 22, 'https://via.placeholder.com/200'),
+('Karaoke Mic', 'Wireless karaoke microphone', 1499, 'Digital Music', 'Philips', 4.0, 10, 'https://via.placeholder.com/200'),
+('DJ Controller', 'Music mixing controller', 15999, 'Digital Music', 'Pioneer', 4.6, 4, 'https://via.placeholder.com/200'),
+('Soundbar', 'Home theater soundbar', 8999, 'Digital Music', 'LG', 4.5, 7, 'https://via.placeholder.com/200'),
+('Studio Monitor', 'Audio studio monitor', 12999, 'Digital Music', 'Yamaha', 4.4, 5, 'https://via.placeholder.com/200'),
+('Bluetooth Mic', 'Podcast microphone', 2499, 'Digital Music', 'Maono', 4.2, 13, 'https://via.placeholder.com/200'),
+('Vinyl Player', 'Classic music player', 6999, 'Digital Music', 'Sony', 4.3, 6, 'https://via.placeholder.com/200'),
+('Bass Earphones', 'Deep bass earphones', 999, 'Digital Music', 'Boat', 4.1, 25, 'https://via.placeholder.com/200'),
+
+-- Girls Fashion
+('Girls Top', 'Stylish top', 799, 'Girls'' Fashion', 'H&M', 4.2, 20, 'https://via.placeholder.com/200'),
+('Girls Dress', 'Summer floral dress', 1599, 'Girls'' Fashion', 'Zara', 4.5, 12, 'https://via.placeholder.com/200'),
+('Girls Sandals', 'Comfort sandals', 999, 'Girls'' Fashion', 'Bata', 4.1, 15, 'https://via.placeholder.com/200'),
+('Girls Handbag', 'Fashion handbag', 2499, 'Girls'' Fashion', 'Lavie', 4.4, 9, 'https://via.placeholder.com/200'),
+('Girls Jeans', 'Slim fit jeans', 1299, 'Girls'' Fashion', 'Levis', 4.3, 14, 'https://via.placeholder.com/200'),
+('Girls Hoodie', 'Winter hoodie', 1499, 'Girls'' Fashion', 'Puma', 4.2, 11, 'https://via.placeholder.com/200'),
+('Girls Watch', 'Stylish watch', 1999, 'Girls'' Fashion', 'Titan', 4.5, 8, 'https://via.placeholder.com/200'),
+('Girls Earrings', 'Fashion earrings', 499, 'Girls'' Fashion', 'Accessorize', 4.0, 30, 'https://via.placeholder.com/200'),
+('Girls Sneakers', 'Casual sneakers', 1799, 'Girls'' Fashion', 'Nike', 4.4, 10, 'https://via.placeholder.com/200'),
+('Girls Jacket', 'Leather jacket', 2999, 'Girls'' Fashion', 'Roadster', 4.6, 7, 'https://via.placeholder.com/200'),
+
+-- Health & Household
+('Dettol Handwash', 'Kills germs', 199, 'Health & Household', 'Dettol', 4.5, 40, 'https://via.placeholder.com/200'),
+('Toothpaste', 'Strong teeth protection', 149, 'Health & Household', 'Colgate', 4.3, 50, 'https://via.placeholder.com/200'),
+('Vitamin Tablets', 'Daily vitamins', 599, 'Health & Household', 'Himalaya', 4.2, 18, 'https://via.placeholder.com/200'),
+('Protein Powder', 'Fitness supplement', 2499, 'Health & Household', 'MuscleBlaze', 4.4, 10, 'https://via.placeholder.com/200'),
+('Hand Sanitizer', 'Alcohol sanitizer', 99, 'Health & Household', 'Lifebuoy', 4.1, 60, 'https://via.placeholder.com/200'),
+('Face Mask Pack', 'Disposable masks', 299, 'Health & Household', 'Care', 4.0, 45, 'https://via.placeholder.com/200'),
+('Floor Cleaner', 'Home cleaning liquid', 249, 'Health & Household', 'Lizol', 4.3, 35, 'https://via.placeholder.com/200'),
+('Mosquito Killer', 'Insect protection', 399, 'Health & Household', 'All Out', 4.1, 22, 'https://via.placeholder.com/200'),
+('Soap Pack', 'Bath soap combo', 199, 'Health & Household', 'Dove', 4.2, 28, 'https://via.placeholder.com/200'),
+('Shampoo Bottle', 'Hair care shampoo', 349, 'Health & Household', 'Tresemme', 4.4, 17, 'https://via.placeholder.com/200');
+
+
+CREATE TABLE addresses (
+    id INT NOT NULL AUTO_INCREMENT,
+
+    user_id INT NOT NULL,
+
+    full_name VARCHAR(100) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+
+    address_line TEXT NOT NULL,
+    city VARCHAR(100),
+    pincode VARCHAR(20),
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (id),
+
+    CONSTRAINT fk_address_user
+    FOREIGN KEY (user_id)
+    REFERENCES users(id)
+    ON DELETE CASCADE
+);
+
+ALTER TABLE products
+ADD COLUMN active BOOLEAN DEFAULT TRUE;
+
+
+ALTER TABLE orders
+ADD COLUMN address_id INT;
+
+ALTER TABLE addresses
+ADD COLUMN is_active BOOLEAN DEFAULT TRUE;
+
+ALTER TABLE orders
+ADD COLUMN full_name VARCHAR(100),
+ADD COLUMN phone VARCHAR(20),
+ADD COLUMN city VARCHAR(100),
+ADD COLUMN pincode VARCHAR(20);

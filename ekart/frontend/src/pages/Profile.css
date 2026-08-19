@@ -1,0 +1,148 @@
+.profile-container {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-container h2 {
+  margin-bottom: 25px;
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 700px;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border: 1px solid #ececec;
+  transition: 0.2s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-2px);
+}
+
+.profile-card p {
+  margin: 8px 0;
+  font-size: 15px;
+  color: #444;
+}
+
+.logout-button {
+  width: 100%;
+  padding: 12px;
+  background: #2f2c69;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 18px;
+}
+
+.logout-button:hover {
+  opacity: 0.95;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edit-form input,
+.edit-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.edit-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.address-action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.save-address-btn,
+.cancel-address-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.save-address-btn {
+  background: #2f2c69;
+  color: white;
+}
+
+.cancel-address-btn {
+  background: #e5e5e5;
+  color: #333;
+}
+
+.save-address-btn:hover,
+.cancel-address-btn:hover {
+  opacity: 0.95;
+}
+
+/* NEW ADDRESS CARD STYLING */
+
+.address-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ececec;
+}
+
+.address-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: #222;
+}
+
+.address-phone {
+  font-size: 14px;
+  color: #666;
+}
+
+.address-body {
+  line-height: 1.6;
+  color: #444;
+}
+
+.address-body p {
+  margin: 6px 0;
+}
+
+.success-message {
+  width: 100%;
+  max-width: 700px;
+  margin: 20px auto 0;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-align: center;
+  background: #e8f7e8;
+  color: #1d6b1d;
+  font-weight: 500;
+  border: 1px solid #c7e8c7;
+}
+.address-page-header {
+  margin-bottom: 25px;
+}

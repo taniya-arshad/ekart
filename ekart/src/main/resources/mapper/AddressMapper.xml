@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ekart.repository.AddressRepository">
+
+    <insert id="saveAddress">
+
+        INSERT INTO addresses
+        (
+        user_id,
+        full_name,
+        phone,
+        address_line,
+        city,
+        pincode
+        )
+        VALUES
+        (
+        #{userId},
+        #{fullName},
+        #{phone},
+        #{addressLine},
+        #{city},
+        #{pincode}
+        )
+
+    </insert>
+
+    <select id="getAddressesByUserId"
+            resultType="com.example.ekart.dto.AddressResponse">
+
+        SELECT
+        id,
+        full_name AS fullName,
+        phone,
+        address_line AS addressLine,
+        city,
+        pincode
+        FROM addresses
+        WHERE user_id = #{userId}
+        AND is_active = TRUE
+        ORDER BY id DESC
+
+    </select>
+
+    <update id="updateAddress">
+
+        UPDATE addresses
+        SET
+        full_name = #{fullName},
+        phone = #{phone},
+        address_line = #{addressLine},
+        city = #{city},
+        pincode = #{pincode}
+        WHERE id = #{id}
+
+    </update>
+    <delete id="deleteAddress">
+        DELETE FROM addresses
+        WHERE id = #{id}
+    </delete>
+    <update id="deactivateAddress">
+        UPDATE addresses
+        SET is_active = FALSE
+        WHERE id = #{id}
+    </update>
+
+    <select id="countDuplicateAddress"
+            resultType="int">
+
+        SELECT COUNT(*)
+        FROM addresses
+        WHERE user_id = #{userId}
+        AND full_name = #{fullName}
+        AND phone = #{phone}
+        AND address_line = #{addressLine}
+        AND city = #{city}
+        AND pincode = #{pincode}
+
+    </select>
+
+</mapper>

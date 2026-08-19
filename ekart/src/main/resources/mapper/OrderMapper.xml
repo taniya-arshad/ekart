@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ekart.repository.OrderRepository">
+
+    <insert id="insertOrder">
+        INSERT INTO orders
+        (
+        user_id,
+        address_id,
+        address,
+        full_name,
+        phone,
+        city,
+        pincode,
+        total_amount,status
+        )
+        VALUES
+        (
+        #{userId},
+        #{addressId},
+        #{address},
+        #{fullName},
+        #{phone},
+        #{city},
+        #{pincode},
+        #{totalAmount},
+        'PLACED'
+        )
+    </insert>
+
+    <select id="getLastOrderId" resultType="int">
+        SELECT LAST_INSERT_ID()
+    </select>
+
+    <insert id="insertOrderItem">
+        INSERT INTO order_items
+        (order_id, product_id, quantity, price, total_amount)
+        VALUES
+        (#{orderId}, #{productId}, #{quantity}, #{price}, #{quantity} * #{price})
+    </insert>
+
+    <select id="getOrdersByUserId"
+            parameterType="int"
+            resultType="com.example.ekart.dto.OrderResponse">
+
+        SELECT
+        id,
+        address,
+        total_amount AS totalAmount
+        FROM orders
+        WHERE user_id = #{userId}
+        ORDER BY id DESC
+
+    </select>
+
+    <select id="getOrderHeadersByUserId"
+            resultType="com.example.ekart.dto.OrderDetailsResponse">
+
+        SELECT
+        o.id AS orderId,
+        o.status,
+        o.total_amount AS totalAmount,
+        o.created_at AS createdAt,
+
+        o.full_name AS fullName,
+        o.phone,
+        o.address,
+        o.city,
+        o.pincode
+
+        FROM orders o
+
+        WHERE o.user_id = #{userId}
+
+        ORDER BY o.created_at DESC
+
+    </select>
+    <select id="getOrderHeaderByOrderId"
+            resultType="com.example.ekart.dto.OrderDetailsResponse">
+
+        SELECT
+        o.id AS orderId,
+        o.status,
+        o.total_amount AS totalAmount,
+        o.created_at AS createdAt,
+
+        o.full_name AS fullName,
+        o.phone,
+        o.address,
+        o.city,
+        o.pincode
+
+        FROM orders o
+
+        WHERE o.id = #{orderId}
+
+    </select>
+
+    <select id="getOrderItemsByOrderId"
+            resultType="com.example.ekart.dto.OrderItemResponse">
+
+        SELECT
+        oi.product_id AS productId,
+        p.name AS productName,
+        oi.quantity,
+        oi.price
+        FROM order_items oi
+        INNER JOIN products p
+        ON oi.product_id = p.id
+        WHERE oi.order_id = #{orderId}
+
+    </select>
+    <select id="getAllOrders"
+            resultType="com.example.ekart.dto.OrderDetailsResponse">
+
+        SELECT
+
+        o.id AS orderId,
+        o.status,
+        o.created_at AS createdAt,
+        o.total_amount AS totalAmount,
+
+        u.name AS customerName,
+        u.email AS customerEmail,
+        a.phone,
+        o.address
+
+        FROM orders o
+
+        JOIN users u
+        ON o.user_id = u.id
+
+        LEFT JOIN addresses a
+        ON o.address_id = a.id
+
+        ORDER BY o.created_at DESC
+
+    </select>
+    <update id="updateOrderStatus">
+
+        UPDATE orders
+        SET status = #{status}
+        WHERE id = #{orderId}
+
+    </update>
+
+    <select id="getOrderStatus"
+            resultType="string">
+
+        SELECT status
+        FROM orders
+        WHERE id = #{orderId}
+
+    </select>
+    <select id="countOrdersByAddressId"
+            resultType="int">
+
+        SELECT COUNT(*)
+        FROM orders
+        WHERE address_id = #{addressId}
+
+    </select>
+
+</mapper>

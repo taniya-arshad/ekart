@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ekart.repository.ProductRepository">
+
+    <insert id="insertProduct" parameterType="com.example.ekart.model.Product">
+        INSERT INTO products
+        (name, description, price, category, brand, rating, quantity, image,active)
+        VALUES
+        (#{name}, #{description}, #{price}, #{category}, #{brand}, #{rating}, #{quantity}, #{image},true)
+    </insert>
+
+    <select id="getAllProducts"
+            resultType="com.example.ekart.model.Product">
+
+        SELECT *
+        FROM products
+        WHERE active = true
+
+    </select>
+    <select
+            id="getProductById"
+            parameterType="int"
+            resultType="com.example.ekart.model.Product">
+
+        SELECT *
+        FROM products
+        WHERE id = #{id}
+
+    </select>
+
+    <update id="updateQuantity">
+
+        UPDATE products
+        SET quantity = #{quantity}
+        WHERE id = #{id}
+
+    </update>
+    <update id="deactivateProduct">
+        UPDATE products
+        SET active = false
+        WHERE id = #{id}
+    </update>
+    <update id="updateProduct"
+            parameterType="com.example.ekart.model.Product">
+
+        UPDATE products
+        SET
+        name = #{name},
+        description = #{description},
+        price = #{price},
+        category = #{category},
+        brand = #{brand},
+        rating = #{rating},
+        quantity = #{quantity},
+        image = #{image}
+        WHERE id = #{id}
+
+    </update>
+
+</mapper>

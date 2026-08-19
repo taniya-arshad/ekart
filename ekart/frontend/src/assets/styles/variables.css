@@ -1,0 +1,16 @@
+:root {
+  /* Colors */
+  --primary-color: #2C2F5B;
+  --background-color: #F5F6FA;
+  --white: #ffffff;
+  --text-color: #333;
+
+  /* Radius */
+  --radius-large: 20px;
+
+  /* Shadow */
+  --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+  /* Spacing */
+  --padding: 20px;
+}
