@@ -9,4 +9,8 @@ public interface UserRepository {
     void insertUser(User user);
     User findByEmail(String email);
     void updateLastLogin(String email);
+    void updateProfile(User user);
+    User findByEmailAndNotId(String email, int id);
+    void updatePassword(int id, String password);
+    User findById(int id);
 }

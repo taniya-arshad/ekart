@@ -4,19 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9df997d4-c097-4ac0-b8bd-45238658ec3f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/controller/ReviewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/dto/AddReviewRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/dto/ReviewRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/dto/ReviewResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/model/Review.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/repository/ReviewRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/ReviewService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ekart/src/main/resources/mapper/ReviewMapper.xml" afterDir="false" />
+    <list default="true" id="9df997d4-c097-4ac0-b8bd-45238658ec3f" name="Changes" comment="reviews display on product screen">
+      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/dto/ChangePasswordRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/DBScripts" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/DBScripts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/Profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/Profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/src/main/resources/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,11 +123,33 @@
       <option name="presentableId" value="Default" />
       <updated>1787110218429</updated>
     </task>
+    <task id="LOCAL-00001" summary="reviews display on product screen">
+      <option name="closed" value="true" />
+      <created>1787485123511</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1787485123511</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
       <path value="$PROJECT_DIR$/ekart" />
     </ignored-roots>
+    <MESSAGE value="reviews display on product screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="reviews display on product screen" />
   </component>
 </project>

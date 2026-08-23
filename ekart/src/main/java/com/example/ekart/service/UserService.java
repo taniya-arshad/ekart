@@ -1,5 +1,6 @@
 package com.example.ekart.service;
 
+import com.example.ekart.dto.ChangePasswordRequest;
 import com.example.ekart.dto.LoginResponse;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -69,4 +70,63 @@ public class UserService {
                 user.getEmail(),user.getRole()
         );
     }
+    @Transactional
+    public void updateProfile(User user) {
+
+        User existing =
+                userRepository.findByEmailAndNotId(
+                        user.getEmail(),
+                        user.getId()
+                );
+
+        if (existing != null) {
+            throw new RuntimeException(
+                    "Email already exists"
+            );
+        }
+
+        userRepository.updateProfile(user);
+    }
+    @Transactional
+    public void changePassword(
+            int userId,
+            ChangePasswordRequest request) {
+
+        User user =
+                userRepository.findById(userId);
+
+        if (user == null) {
+            throw new RuntimeException(
+                    "User not found"
+            );
+        }
+
+        if (!encoder.matches(
+                request.getCurrentPassword(),
+                user.getPassword())) {
+
+            throw new RuntimeException(
+                    "Current password is incorrect"
+            );
+        }
+
+        if (request.getNewPassword() == null
+                || request.getNewPassword().trim().isEmpty()) {
+
+            throw new RuntimeException(
+                    "New password cannot be empty"
+            );
+        }
+
+        String encodedPassword =
+                encoder.encode(
+                        request.getNewPassword()
+                );
+
+        userRepository.updatePassword(
+                userId,
+                encodedPassword
+        );
+    }
+
 }
