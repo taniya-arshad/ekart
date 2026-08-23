@@ -3,6 +3,7 @@ package com.example.ekart.service;
 import java.util.List;
 
 import com.example.ekart.dto.ReviewResponse;
+import com.example.ekart.dto.ReviewSummary;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +38,8 @@ public class ReviewService {
 
     public List<ReviewResponse> getReviewsByProductId(int productId) {
         return repo.getReviewsByProductId(productId);
+    }
+    public ReviewSummary getReviewSummaryByProductId(int productId) {
+        return repo.getReviewSummaryByProductId(productId);
     }
 }

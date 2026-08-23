@@ -2,6 +2,7 @@ package com.example.ekart.repository;
 
 import java.util.List;
 
+import com.example.ekart.dto.ReviewSummary;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.ekart.dto.ReviewResponse;
@@ -15,4 +16,6 @@ public interface ReviewRepository {
     List<ReviewResponse> getReviewsByProductId(int productId);
 
     int countReviewByUserAndProduct(int userId, int productId);
+
+    ReviewSummary getReviewSummaryByProductId(int productId);
 }

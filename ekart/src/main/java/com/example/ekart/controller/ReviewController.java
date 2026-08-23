@@ -1,6 +1,7 @@
 package com.example.ekart.controller;
 
 import com.example.ekart.dto.ReviewResponse;
+import com.example.ekart.dto.ReviewSummary;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,5 +54,11 @@ public class ReviewController {
             @PathVariable int productId) {
 
         return service.getReviewsByProductId(productId);
+    }
+    @GetMapping("/product/{productId}/summary")
+    public ReviewSummary getReviewSummaryByProductId(
+            @PathVariable int productId) {
+
+        return service.getReviewSummaryByProductId(productId);
     }
 }

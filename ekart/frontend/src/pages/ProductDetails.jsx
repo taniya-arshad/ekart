@@ -14,6 +14,10 @@ function ProductDetails() {
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
+  const [reviewSummary, setReviewSummary] = useState({
+    averageRating: 0,
+    reviewCount: 0
+  });
 
   const showMessage = (text) => {
 
@@ -155,6 +159,13 @@ function ProductDetails() {
           .then((data) => {
             setReviews(data);
           });
+       fetch(
+          `http://localhost:8081/api/reviews/product/${id}/summary`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            setReviewSummary(data);
+          });
 
       } else if (res.status === 400) {
 
@@ -232,6 +243,20 @@ function ProductDetails() {
       });
 
   }, [id]);
+  useEffect(() => {
+
+  fetch(
+    `http://localhost:8081/api/reviews/product/${id}/summary`
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      setReviewSummary(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+
+    }, [id]);
 
   if (!product) {
 
@@ -369,6 +394,50 @@ function ProductDetails() {
       <div className="reviews-section">
 
         <h3>Customer Reviews</h3>
+        <div className="review-summary">
+
+          <div className="summary-stars">
+
+            {Array.from({ length: 5 }, (_, index) => {
+
+              const starNumber = index + 1;
+              const average = reviewSummary.averageRating;
+
+              const fillPercentage = Math.min(
+                100,
+                Math.max(
+                  0,
+                  (average - (starNumber - 1)) * 100
+                )
+              );
+
+              return (
+                <span
+                  key={index}
+                  className="summary-star"
+                  style={{
+                    "--fill": `${fillPercentage}%`
+                  }}
+                >
+                  <span className="star-background">★</span>
+                  <span className="star-fill">★</span>
+                </span>
+              );
+
+            })}
+
+          </div>
+
+          <p className="summary-text">
+            {reviewSummary.averageRating.toFixed(1)} out of 5
+          </p>
+
+          <p className="summary-count">
+            Based on {reviewSummary.reviewCount} review
+            {reviewSummary.reviewCount !== 1 ? "s" : ""}
+          </p>
+
+        </div>
 
         <form
           className="review-form"

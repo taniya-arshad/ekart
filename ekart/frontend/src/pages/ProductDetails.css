@@ -195,3 +195,50 @@
   font-size: 16px;
   line-height: 1.5;
 }
+.review-summary {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+
+
+.summary-text {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+.summary-count {
+  color: #666;
+  font-size: 15px;
+}
+
+.summary-stars {
+  display: flex;
+  gap: 2px;
+  margin: 10px 0;
+}
+
+.summary-star {
+  position: relative;
+  display: inline-block;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.star-background {
+  color: #ccc;
+}
+
+.star-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--fill);
+  overflow: hidden;
+  color: #f5a623;
+  white-space: nowrap;
+}

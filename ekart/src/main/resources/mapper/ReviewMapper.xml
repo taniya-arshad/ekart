@@ -48,5 +48,15 @@
         AND product_id = #{productId}
 
     </select>
+    <select id="getReviewSummaryByProductId"
+            resultType="com.example.ekart.dto.ReviewSummary">
+
+        SELECT
+        COALESCE(AVG(rating), 0) AS averageRating,
+        COUNT(*) AS reviewCount
+        FROM reviews
+        WHERE product_id = #{productId}
+
+    </select>
 
 </mapper>
