@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import "./ProductDetails.css";
+
 function ProductDetails() {
 
   const { id } = useParams();
@@ -10,6 +11,9 @@ function ProductDetails() {
   const [product, setProduct] = useState(null);
   const [qty, setQty] = useState(1);
   const [message, setMessage] = useState("");
+  const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(5);
+  const [comment, setComment] = useState("");
 
   const showMessage = (text) => {
 
@@ -19,34 +23,36 @@ function ProductDetails() {
       setMessage("");
     }, 3000);
   };
-    const handleBuyNow = () => {
 
-      const user = JSON.parse(
-        localStorage.getItem("user")
-      );
+  const handleBuyNow = () => {
 
-      if (!user) {
+    const user = JSON.parse(
+      localStorage.getItem("user")
+    );
 
-        setMessage("❌ Please login first");
+    if (!user) {
 
-        setTimeout(() => {
-          setMessage("");
-        }, 3000);
+      setMessage("❌ Please login first");
 
-        return;
-      }
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
 
-      navigate("/address", {
-        state: {
-          buyNowItem: {
-            productId: product.id,
-            quantity: qty,
-            price: product.price,
-            name: product.name
-          }
+      return;
+    }
+
+    navigate("/address", {
+      state: {
+        buyNowItem: {
+          productId: product.id,
+          quantity: qty,
+          price: product.price,
+          name: product.name
         }
-      });
-    };
+      }
+    });
+  };
+
   const handleAddToCart = async () => {
 
     const user =
@@ -96,6 +102,104 @@ function ProductDetails() {
     }
   };
 
+  const handleSubmitReview = async (e) => {
+
+    e.preventDefault();
+
+    const user = JSON.parse(
+      localStorage.getItem("user")
+    );
+
+    if (!user) {
+
+      showMessage(
+        "❌ Please login first"
+      );
+
+      return;
+    }
+
+    try {
+
+      const res = await fetch(
+        "http://localhost:8081/api/reviews",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            userId: user.id,
+            productId: product.id,
+            rating: rating,
+            comment: comment
+          })
+        }
+      );
+
+      const msg = await res.text();
+
+      if (res.ok) {
+
+        showMessage(
+          `✅ ${msg}`
+        );
+
+        setRating(5);
+        setComment("");
+
+        fetch(
+          `http://localhost:8081/api/reviews/product/${id}`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            setReviews(data);
+          });
+
+      } else if (res.status === 400) {
+
+         showMessage(
+           "❌ You have already reviewed this product."
+         );
+
+       } else {
+
+         showMessage(
+           "❌ Failed to add review. Please try again."
+         );
+       }
+
+    } catch (err) {
+
+      console.error(err);
+
+      showMessage(
+        "❌ Error adding review"
+      );
+    }
+  };
+
+  const getRatingLabel = () => {
+
+    if (rating === 1) {
+      return "Poor";
+    }
+
+    if (rating === 2) {
+      return "Below Average";
+    }
+
+    if (rating === 3) {
+      return "Average";
+    }
+
+    if (rating === 4) {
+      return "Very Good";
+    }
+
+    return "Excellent";
+  };
+
   useEffect(() => {
 
     fetch(
@@ -110,6 +214,21 @@ function ProductDetails() {
         );
 
         setProduct(found);
+      });
+
+  }, [id]);
+
+  useEffect(() => {
+
+    fetch(
+      `http://localhost:8081/api/reviews/product/${id}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setReviews(data);
+      })
+      .catch((err) => {
+        console.error(err);
       });
 
   }, [id]);
@@ -251,37 +370,110 @@ function ProductDetails() {
 
         <h3>Customer Reviews</h3>
 
-        <div className="review">
+        <form
+          className="review-form"
+          onSubmit={handleSubmitReview}
+        >
 
-          <p>⭐⭐⭐⭐⭐</p>
+          <h4>Write a Review</h4>
 
-          <p>
-            Excellent product,
-            highly recommended!
+          <label>
+            How would you rate this product?
+          </label>
+
+          <div className="rating-stars">
+
+            {[1, 2, 3, 4, 5].map((star) => (
+
+              <button
+                type="button"
+                key={star}
+                className={
+                  star <= rating
+                    ? "star selected"
+                    : "star"
+                }
+                onClick={() =>
+                  setRating(star)
+                }
+              >
+                {star <= rating ? "★" : "☆"}
+              </button>
+
+            ))}
+
+          </div>
+
+          <p className="rating-label">
+            {getRatingLabel()}
           </p>
 
-        </div>
+          <label>
+            Comment
+          </label>
 
-        <div className="review">
+          <textarea
+            value={comment}
+            onChange={(e) =>
+              setComment(e.target.value)
+            }
+            placeholder="Write your review..."
+            required
+          />
 
-          <p>⭐⭐⭐⭐</p>
+          <button
+            type="submit"
+            className="btn-primary"
+          >
+            Submit Review
+          </button>
 
-          <p>
-            Good quality but
-            packaging could be better.
-          </p>
+        </form>
 
-        </div>
+        {reviews.length === 0 ? (
 
-        <div className="review">
+          <p>No reviews yet.</p>
 
-          <p>⭐⭐⭐</p>
+        ) : (
 
-          <p>
-            Average experience.
-          </p>
+          reviews.map((review) => (
 
-        </div>
+            <div
+              className="review"
+              key={review.id}
+            >
+
+              <p className="review-user">
+                {review.userName}
+              </p>
+
+              <p className="review-rating">
+                {"★".repeat(review.rating)}
+                {"☆".repeat(5 - review.rating)}
+              </p>
+
+              <p className="review-date">
+                {new Date(
+                  review.createdAt
+                ).toLocaleDateString(
+                  "en-US",
+                  {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                  }
+                )}
+              </p>
+
+              <p className="review-comment">
+                {review.comment}
+              </p>
+
+            </div>
+
+          ))
+
+        )}
 
       </div>
 

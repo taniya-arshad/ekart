@@ -5,12 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9df997d4-c097-4ac0-b8bd-45238658ec3f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/OrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/controller/ReviewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/dto/AddReviewRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/dto/ReviewRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/dto/ReviewResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/model/Review.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/repository/ReviewRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/ReviewService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ekart/src/main/resources/mapper/ReviewMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/DBScripts" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/DBScripts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,22 +60,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.EkartApplication.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature-branch",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ajame/PROJECT",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "MavenSettings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.EkartApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature-branch&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ajame/PROJECT&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.EkartApplication">
     <configuration name="EkartApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.ekart.EkartApplication" />

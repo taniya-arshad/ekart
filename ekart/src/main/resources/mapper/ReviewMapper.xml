@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.ekart.repository.ReviewRepository">
+
+    <insert id="insertReview"
+            parameterType="com.example.ekart.model.Review">
+
+        INSERT INTO reviews
+        (user_id, product_id, rating, comment)
+        VALUES
+        (#{userId}, #{productId}, #{rating}, #{comment})
+
+    </insert>
+
+    <select id="getReviewsByProductId"
+            resultType="com.example.ekart.dto.ReviewResponse">
+
+        SELECT
+        r.id,
+        r.user_id AS userId,
+        r.product_id AS productId,
+        u.name AS userName,
+        r.rating,
+        r.comment,
+        r.created_at AS createdAt,
+        r.updated_at AS updatedAt
+
+        FROM reviews r
+
+        JOIN users u
+        ON r.user_id = u.id
+
+        WHERE r.product_id = #{productId}
+
+        ORDER BY r.created_at DESC
+
+    </select>
+
+    <select id="countReviewByUserAndProduct"
+            resultType="int">
+
+        SELECT COUNT(*)
+        FROM reviews
+        WHERE user_id = #{userId}
+        AND product_id = #{productId}
+
+    </select>
+
+</mapper>
