@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate ,useLocation} from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import "./ProductDetails.css";
@@ -7,7 +7,27 @@ function ProductDetails() {
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  if (!location.state?.fromUI) {
+    return (
+      <div className="access-denied">
+        <div className="access-denied-card">
+          <h2>Access Denied</h2>
 
+          <p>
+            Direct access to this page is not permitted.
+          </p>
+
+          <button
+            className="btn-primary"
+            onClick={() => navigate("/home")}
+          >
+            Go to Home
+          </button>
+        </div>
+      </div>
+    );
+  }
   const [product, setProduct] = useState(null);
   const [qty, setQty] = useState(1);
   const [message, setMessage] = useState("");
@@ -64,7 +84,10 @@ function ProductDetails() {
         localStorage.getItem("user")
       );
 
-    if (!user) {
+    const token =
+      localStorage.getItem("token");
+
+    if (!user || !token) {
 
       showMessage(
         "❌ Please login first"
@@ -80,8 +103,8 @@ function ProductDetails() {
         {
           method: "POST",
           headers: {
-            "Content-Type":
-              "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
           },
           body: JSON.stringify({
             userId: user.id,
@@ -94,7 +117,24 @@ function ProductDetails() {
       const msg =
         await res.text();
 
-      showMessage(`✅ ${msg}`);
+      if (res.ok) {
+
+        showMessage(
+          `✅ ${msg}`
+        );
+
+      } else if (res.status === 403) {
+
+        showMessage(
+          "❌ Authorization required"
+        );
+
+      } else {
+
+        showMessage(
+          "❌ Failed to add item to cart"
+        );
+      }
 
     } catch (err) {
 

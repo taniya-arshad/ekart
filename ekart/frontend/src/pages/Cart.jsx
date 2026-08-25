@@ -6,162 +6,285 @@ import { useNavigate } from "react-router-dom";
 function Cart() {
 
   const navigate = useNavigate();
-    const [cart, setCart] = useState([]);
-   const fetchCart = async () => {
-       const storedUser = localStorage.getItem("user");
+  const [cart, setCart] = useState([]);
 
-       if (!storedUser || storedUser === "undefined") return;
+  const fetchCart = async () => {
 
-       const user = JSON.parse(storedUser);
+    const storedUser =
+      localStorage.getItem("user");
 
-       try {
-         const res = await fetch(`http://localhost:8081/api/cart/user/${user.id}`);
-         const data = await res.json();
+    const token =
+      localStorage.getItem("token");
 
-         console.log("Cart at checkout:", data);
-         setCart(data);
-       } catch (err) {
-         console.error(err);
-       }
-     };
+    if (
+      !storedUser ||
+      storedUser === "undefined" ||
+      !token ||
+      token === "undefined"
+    ) {
+      return;
+    }
 
-     // ✅ useEffect only calls it
-     useEffect(() => {
-       fetchCart();
-     }, []);
-
-
-  // ✅ Update quantity (remove + add)
-  const updateQty = async (item, newQty) => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user =
+      JSON.parse(storedUser);
 
     try {
-      // remove old
-      await fetch(
-        `http://localhost:8081/api/cart/remove?userId=${user.id}&productId=${item.productId}`,
-        { method: "DELETE" }
+
+      const res = await fetch(
+        `http://localhost:8081/api/cart/user/${user.id}`,
+        {
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        }
       );
 
-      // add updated
-      await fetch("http://localhost:8081/api/cart/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          userId: user.id,
-          productId: item.productId,
-          quantity: newQty
-        })
-      });
+      if (!res.ok) {
+        throw new Error(
+          "Failed to fetch cart"
+        );
+      }
 
-      fetchCart(); // refresh
+      const data =
+        await res.json();
+
+      setCart(data);
+
     } catch (err) {
+
       console.error(err);
     }
   };
 
-  // ✅ Remove item
-  const removeItem = async (productId) => {
-    const user = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+
+    fetchCart();
+
+  }, []);
+
+  const updateQty = async (
+    item,
+    newQty
+  ) => {
+
+    const user =
+      JSON.parse(
+        localStorage.getItem("user")
+      );
+
+    const token =
+      localStorage.getItem("token");
 
     try {
+
       await fetch(
-        `http://localhost:8081/api/cart/remove?userId=${user.id}&productId=${productId}`,
-        { method: "DELETE" }
+        `http://localhost:8081/api/cart/remove?userId=${user.id}&productId=${item.productId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        }
+      );
+
+      await fetch(
+        "http://localhost:8081/api/cart/add",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            userId: user.id,
+            productId: item.productId,
+            quantity: newQty
+          })
+        }
       );
 
       fetchCart();
+
     } catch (err) {
+
       console.error(err);
     }
   };
 
-  // ✅ Total price
-  const totalPrice = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  const removeItem = async (
+    productId
+  ) => {
+
+    const user =
+      JSON.parse(
+        localStorage.getItem("user")
+      );
+
+    const token =
+      localStorage.getItem("token");
+
+    try {
+
+      await fetch(
+        `http://localhost:8081/api/cart/remove?userId=${user.id}&productId=${productId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        }
+      );
+
+      fetchCart();
+
+    } catch (err) {
+
+      console.error(err);
+    }
+  };
+
+  const totalPrice =
+    cart.reduce(
+      (sum, item) =>
+        sum +
+        item.price *
+        item.quantity,
+      0
+    );
 
   return (
+
     <div>
+
       <Navbar />
 
       <div className="cart-container">
+
         <h2>Your Cart</h2>
 
         {cart.length === 0 ? (
+
           <p>Your cart is empty</p>
+
         ) : (
+
           <>
+
             {cart.map((item) => (
-              <div className="cart-item" key={item.productId}>
-                {/* ✅ Product Image */}
-                <img src={item.image} alt={item.name} />
+
+              <div
+                className="cart-item"
+                key={item.productId}
+              >
+
+                <img
+                  src={item.image}
+                  alt={item.name}
+                />
 
                 <div className="cart-details">
-                  {/* ✅ Product Info */}
-                  <h4>{item.name}</h4>
-                  <p>₹{item.price}</p>
 
-                  {/* ✅ Quantity Controls */}
+                  <h4>
+                    {item.name}
+                  </h4>
+
+                  <p>
+                    ₹{item.price}
+                  </p>
+
                   <div className="qty-box">
+
                     <button
                       onClick={() =>
                         updateQty(
                           item,
-                          item.quantity > 1 ? item.quantity - 1 : 1
+                          item.quantity > 1
+                            ? item.quantity - 1
+                            : 1
                         )
                       }
                     >
                       -
                     </button>
 
-                    <span>{item.quantity}</span>
+                    <span>
+                      {item.quantity}
+                    </span>
 
                     <button
                       onClick={() =>
-                        updateQty(item, item.quantity + 1)
+                        updateQty(
+                          item,
+                          item.quantity + 1
+                        )
                       }
                     >
                       +
                     </button>
+
                   </div>
 
-                  {/* ✅ Remove */}
                   <button
                     className="remove-btn"
-                    onClick={() => removeItem(item.productId)}
+                    onClick={() =>
+                      removeItem(
+                        item.productId
+                      )
+                    }
                   >
                     Remove
                   </button>
+
                 </div>
+
               </div>
+
             ))}
 
-            {/* ✅ Summary */}
             <div className="cart-summary">
-              <h3>Total: ₹{totalPrice}</h3>
+
+              <h3>
+                Total: ₹{totalPrice}
+              </h3>
 
               <button
                 className="checkout-btn"
                 onClick={() => {
-                  const token = localStorage.getItem("token");
 
-                  if (!token || token === "undefined") {
-                    alert("Please login first");
+                  const token =
+                    localStorage.getItem(
+                      "token"
+                    );
+
+                  if (
+                    !token ||
+                    token === "undefined"
+                  ) {
+
+                    alert(
+                      "Please login first"
+                    );
+
                     navigate("/login");
+
                   } else {
+
                     navigate("/address");
                   }
+
                 }}
               >
                 Proceed to Checkout
               </button>
+
             </div>
+
           </>
+
         )}
+
       </div>
+
     </div>
   );
 }

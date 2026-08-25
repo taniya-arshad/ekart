@@ -75,7 +75,11 @@ const [searchText, setSearchText] = useState("");
             <div
               key={p.id}
               className="product-card"
-              onClick={() => navigate(`/product/${p.id}`)}
+              onClick={() =>
+                navigate(`/product/${p.id}`, {
+                  state: { fromUI: true }
+                })
+              }
             >
               <img src={p.image} alt={p.name} />
 

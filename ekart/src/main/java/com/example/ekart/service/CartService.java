@@ -2,6 +2,8 @@ package com.example.ekart.service;
 
 import java.util.List;
 
+import com.example.ekart.model.User;
+import com.example.ekart.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import com.example.ekart.model.Cart;
@@ -13,10 +15,15 @@ public class CartService {
 
     private final CartRepository cartRepository;
 
-    public CartService(CartRepository cartRepository) {
-        this.cartRepository = cartRepository;
-    }
+    private final UserRepository userRepository;
 
+    public CartService(
+            CartRepository cartRepository,
+            UserRepository userRepository) {
+
+        this.cartRepository = cartRepository;
+        this.userRepository = userRepository;
+    }
     // ✅ Add to cart (merge if exists)
     public void addToCart(int userId, int productId, int quantity) {
         Cart existing = cartRepository.findByUserAndProduct(userId, productId);
@@ -43,5 +50,15 @@ public class CartService {
 
     public void clearCart(int userId) {
         cartRepository.clearCart(userId);
+    }
+    public boolean isUserOwner(
+            int userId,
+            String email) {
+
+        User user =
+                userRepository.findByEmail(email);
+
+        return user != null
+                && user.getId() == userId;
     }
 }
