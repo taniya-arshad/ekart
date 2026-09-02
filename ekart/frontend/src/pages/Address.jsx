@@ -7,17 +7,19 @@ import {
   useNavigate,
   useLocation
 } from "react-router-dom";
+
 function Address() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const buyNowItem =location.state?.buyNowItem;
+  const buyNowItem = location.state?.buyNowItem;
+
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [showNewAddressForm, setShowNewAddressForm] =
     useState(false);
   const [loading, setLoading] =
-      useState(false);
+    useState(false);
 
   const [message, setMessage] = useState("");
 
@@ -63,24 +65,20 @@ function Address() {
       if (!storedUser) return;
 
       const user = JSON.parse(storedUser);
-          if (
-          cart.length === 0 &&
-          !buyNowItem
-        ) {
-
-          showMessage(
-            "❌ Your cart is empty"
-          );
-
-          setLoading(false);
-
-          return;
-        }
 
       try {
 
+        const token =
+          localStorage.getItem("token");
+
         const cartRes = await fetch(
-          `${BASE_URL}/cart/user/${user.id}`
+          `${BASE_URL}/cart/user/${user.id}`,
+          {
+            headers: {
+              Authorization:
+                `Bearer ${token}`
+            }
+          }
         );
 
         const cartData =
@@ -88,8 +86,17 @@ function Address() {
 
         setCart(cartData);
 
-        const token =
-          localStorage.getItem("token");
+        if (
+          cartData.length === 0 &&
+          !buyNowItem
+        ) {
+
+          showMessage(
+            "❌ Your cart is empty"
+          );
+
+          return;
+        }
 
         const addressRes = await fetch(
           `${BASE_URL}/addresses/user/${user.id}`,
@@ -107,7 +114,10 @@ function Address() {
         setSavedAddresses(addressData);
 
         if (addressData.length > 0) {
-          setSelectedAddress(addressData[0]);
+
+          setSelectedAddress(
+            addressData[0]
+          );
         }
 
       } catch (err) {
@@ -128,14 +138,14 @@ function Address() {
     });
   };
 
-     const handlePlaceOrder = async () => {
+  const handlePlaceOrder = async () => {
 
-       if (loading) return;
+    if (loading) return;
 
-       setLoading(true);
+    setLoading(true);
 
-       const storedUser =
-         localStorage.getItem("user");
+    const storedUser =
+      localStorage.getItem("user");
 
     const user =
       JSON.parse(storedUser);
@@ -153,7 +163,9 @@ function Address() {
         showMessage(
           "❌ Please fill all required fields"
         );
+
         setLoading(false);
+
         return;
       }
 
@@ -175,7 +187,9 @@ function Address() {
       showMessage(
         "❌ Please select an address"
       );
-setLoading(false);
+
+      setLoading(false);
+
       return;
     }
 
@@ -212,10 +226,9 @@ setLoading(false);
           (total, item) =>
             total +
             item.price *
-              item.quantity,
+            item.quantity,
           0
         );
-
 
     try {
 
@@ -224,79 +237,92 @@ setLoading(false);
 
       if (showNewAddressForm) {
 
-        const saveAddressRes = await fetch(
-          `${BASE_URL}/addresses`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type":
-                "application/json",
-              Authorization:
-                `Bearer ${token}`
-            },
-            body: JSON.stringify({
-              userId: user.id,
-              fullName: form.name,
-              phone: form.phone,
-              addressLine: form.address,
-              city: form.city,
-              pincode: form.pincode
-            })
-          }
-        );
+        const saveAddressRes =
+          await fetch(
+            `${BASE_URL}/addresses`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type":
+                  "application/json",
+                Authorization:
+                  `Bearer ${token}`
+              },
+              body: JSON.stringify({
+                userId: user.id,
+                fullName: form.name,
+                phone: form.phone,
+                addressLine: form.address,
+                city: form.city,
+                pincode: form.pincode
+              })
+            }
+          );
 
         if (!saveAddressRes.ok) {
 
           showMessage(
             "This address already exists in your saved addresses ❌"
           );
-setLoading(false);
+
+          setLoading(false);
+
           return;
         }
-    const addressRes = await fetch(
-      `${BASE_URL}/addresses/user/${user.id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    );
 
-        const addresses = await addressRes.json();
+        const addressRes =
+          await fetch(
+            `${BASE_URL}/addresses/user/${user.id}`,
+            {
+              headers: {
+                Authorization:
+                  `Bearer ${token}`
+              }
+            }
+          );
 
-        // Take the newest address
+        const addresses =
+          await addressRes.json();
+
         finalAddress = addresses[0];
-
       }
-    const orderData = {
 
-      userId: user.id,
+      const orderData = {
 
-      addressId: finalAddress.id,
+        userId: user.id,
 
-      address:
-        finalAddress.addressLine,
+        addressId:
+          finalAddress.id,
 
-      fullName:
-        finalAddress.fullName,
+        address:
+          finalAddress.addressLine,
 
-      phone:
-        finalAddress.phone,
+        fullName:
+          finalAddress.fullName,
 
-      city:
-        finalAddress.city,
+        phone:
+          finalAddress.phone,
 
-      pincode:
-        finalAddress.pincode,
+        city:
+          finalAddress.city,
 
-      totalAmount,
+        pincode:
+          finalAddress.pincode,
 
-      items: orderItems
-    };
+        totalAmount,
+
+        items: orderItems
+      };
+
       console.log(orderData);
+
       const res =
         await placeOrder(orderData);
-        console.log(orderData,"<------------------------------");
+
+      console.log(
+        orderData,
+        "<------------------------------"
+      );
 
       if (res.ok) {
 
@@ -305,11 +331,17 @@ setLoading(false);
           await fetch(
             `${BASE_URL}/cart/clear/${user.id}`,
             {
-              method: "DELETE"
+              method: "DELETE",
+              headers: {
+                Authorization:
+                  `Bearer ${token}`
+              }
             }
           );
         }
+
         setLoading(false);
+
         showMessage(
           "✅ Order placed successfully"
         );
@@ -321,7 +353,8 @@ setLoading(false);
         }, 2500);
 
       } else {
-         setLoading(false);
+
+        setLoading(false);
 
         showMessage(
           "❌ Failed to place order"
@@ -331,7 +364,9 @@ setLoading(false);
     } catch (err) {
 
       console.error(err);
-     setLoading(false);
+
+      setLoading(false);
+
       showMessage(
         "❌ Server error"
       );
@@ -345,47 +380,53 @@ setLoading(false);
       <Navbar />
 
       {message && (
+
         <div
-           ref={messageRef}
-              className={
-                message.includes("❌")
-                  ? "error-message"
-                  : "success-message" }
+          ref={messageRef}
+          className={
+            message.includes("❌")
+              ? "error-message"
+              : "success-message"
+          }
         >
           {message}
         </div>
+
       )}
 
       <div className="address-container">
 
         <h2>Delivery Address</h2>
-           {buyNowItem && (
 
-             <div className="buy-now-summary">
+        {buyNowItem && (
 
-               <h3>Buying Now</h3>
+          <div className="buy-now-summary">
 
-               <p>
-                 {buyNowItem.name}
-               </p>
+            <h3>Buying Now</h3>
 
-               <p>
-                 Qty: {buyNowItem.quantity}
-               </p>
+            <p>
+              {buyNowItem.name}
+            </p>
 
-               <p>
-                 Total:
-                 ₹
-                 {buyNowItem.price *
-                   buyNowItem.quantity}
-               </p>
+            <p>
+              Qty: {buyNowItem.quantity}
+            </p>
 
-             </div>
+            <p>
+              Total:
+              ₹
+              {buyNowItem.price *
+                buyNowItem.quantity}
+            </p>
 
-           )}
+          </div>
+
+        )}
+
         {savedAddresses.length > 0 && (
 
           <>
+
             <h3>Saved Addresses</h3>
 
             <select
@@ -430,7 +471,9 @@ setLoading(false);
               )}
 
             </select>
+
           </>
+
         )}
 
         <button
@@ -503,35 +546,32 @@ setLoading(false);
               </p>
 
               <p>
-                {
-                  selectedAddress.addressLine
-                }
+                {selectedAddress.addressLine}
               </p>
 
               <p>
                 {selectedAddress.city}
                 {" - "}
-                {
-                  selectedAddress.pincode
-                }
+                {selectedAddress.pincode}
               </p>
 
             </div>
 
           )
+
         )}
 
         <button
-                   className="place-order-btn"
-                   onClick={handlePlaceOrder}
-                   disabled={loading}
-                 >
-                   {
-                     loading
-                       ? "Placing Order..."
-                       : "Place Order"
-                   }
-                 </button>
+          className="place-order-btn"
+          onClick={handlePlaceOrder}
+          disabled={loading}
+        >
+          {
+            loading
+              ? "Placing Order..."
+              : "Place Order"
+          }
+        </button>
 
       </div>
 

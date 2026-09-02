@@ -5,23 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9df997d4-c097-4ac0-b8bd-45238658ec3f" name="Changes" comment="reviews display on product screen">
-      <change afterPath="$PROJECT_DIR$/ekart/frontend/src/components/AdminRoute.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ekart/frontend/src/components/ProtectedRoute.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/Unauthorized.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/security/JwtAuthenticationFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/DBScripts" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/DBScripts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/assets/styles/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/assets/styles/layout.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/Cart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/Cart.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/Home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/controller/CartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/CartService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/Address.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/Address.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,23 +50,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.EkartApplication.executor": "Run",
-    "Maven.backend [clean,install].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature-branch",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ajame/PROJECT",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "MavenSettings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.EkartApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.backend [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature-branch&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ajame/PROJECT&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
   }
-}]]></component>
+}</component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean install" />
@@ -179,6 +164,11 @@
           <url>file://$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/UserService.java</url>
           <line>128</line>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/AddressService.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
