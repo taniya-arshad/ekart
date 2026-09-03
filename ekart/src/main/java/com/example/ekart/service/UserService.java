@@ -27,30 +27,21 @@ public class UserService {
     @Transactional
     public void register(User user) {
 
-        System.out.println("EMAIL: " + user.getEmail());
-
         User existing = userRepository.findByEmail(user.getEmail());
-
-        System.out.println("FOUND USER: " + existing);
 
         if (existing != null) {
             throw new RuntimeException("Email already exists");
         }
 
-        System.out.println("GOING TO INSERT");
-
         user.setPassword(encoder.encode(user.getPassword()));
         user.setRole("USER");
 
         userRepository.insertUser(user);
-
-        System.out.println("INSERT DONE");
 }
 
     public LoginResponse login(String email, String password) {
 
         User user = userRepository.findByEmail(email);
-        System.out.println("LOGIN ROLE = " + user.getRole());
         if (user == null) {
             throw new RuntimeException("User not found");
         }

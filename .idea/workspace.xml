@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9df997d4-c097-4ac0-b8bd-45238658ec3f" name="Changes" comment="reviews display on product screen">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/Address.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/Address.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,16 +155,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/UserService.java</url>
-          <line>52</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/UserService.java</url>
-          <line>128</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/AddressService.java</url>
           <line>56</line>
