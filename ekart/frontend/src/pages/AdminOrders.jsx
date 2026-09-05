@@ -36,8 +36,17 @@ function AdminOrders() {
 
     try {
 
+      const token =
+        localStorage.getItem("token");
+
       const res = await fetch(
-        "http://localhost:8081/api/orders/admin"
+        "http://localhost:8081/api/orders/admin",
+        {
+          headers: {
+            "Authorization":
+              `Bearer ${token}`
+          }
+        }
       );
 
       const data = await res.json();

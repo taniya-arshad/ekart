@@ -117,13 +117,18 @@ try {
     ? "PUT"
     : "POST";
 
+  const token =
+    localStorage.getItem("token");
+
   const res = await fetch(
     url,
     {
       method: method,
       headers: {
         "Content-Type":
-          "application/json"
+          "application/json",
+        "Authorization":
+          `Bearer ${token}`
       },
       body: JSON.stringify(
         product
