@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.ekart.model.Product;
 import com.example.ekart.repository.ProductRepository;
-
+import org.springframework.cache.annotation.Cacheable;
 @Service
 @Transactional
+
 public class ProductService {
 
     private final ProductRepository repo;
@@ -21,7 +22,7 @@ public class ProductService {
     public void addProduct(Product product) {
         repo.insertProduct(product);
     }
-
+    @Cacheable("products")
     public List<Product> getProducts() {
         return repo.getAllProducts();
     }

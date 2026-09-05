@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9df997d4-c097-4ac0-b8bd-45238658ec3f" name="Changes" comment="reviews display on product screen">
+      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/config/RedisConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/EkartApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/EkartApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
