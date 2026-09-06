@@ -3,6 +3,7 @@ package com.example.ekart.controller;
 import com.example.ekart.dto.OrderDetailsResponse;
 import com.example.ekart.dto.OrderRequest;
 import com.example.ekart.dto.OrderResponse;
+import com.example.ekart.dto.OrderStatusCount;
 import com.example.ekart.service.OrderService;
 
 import org.springframework.http.HttpStatus;
@@ -114,5 +115,10 @@ public class OrderController {
                     "Authorization required"
             );
         }
+    }
+    @GetMapping("/admin/counts")
+    public List<OrderStatusCount> getOrderStatusCounts() {
+
+        return orderService.getOrderStatusCounts();
     }
 }

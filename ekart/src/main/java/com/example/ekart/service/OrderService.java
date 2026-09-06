@@ -1,10 +1,6 @@
 package com.example.ekart.service;
 
-import com.example.ekart.dto.OrderDetailsResponse;
-import com.example.ekart.dto.OrderItem;
-import com.example.ekart.dto.OrderItemResponse;
-import com.example.ekart.dto.OrderRequest;
-import com.example.ekart.dto.OrderResponse;
+import com.example.ekart.dto.*;
 import com.example.ekart.model.Product;
 import com.example.ekart.model.User;
 import com.example.ekart.repository.OrderRepository;
@@ -277,6 +273,9 @@ public class OrderService {
 
         return user != null
                 && user.getId() == userId;
+    }
+    public List<OrderStatusCount> getOrderStatusCounts() {
+        return orderRepository.getOrderStatusCounts();
     }
 
 }

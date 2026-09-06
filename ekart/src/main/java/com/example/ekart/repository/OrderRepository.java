@@ -4,6 +4,7 @@ import com.example.ekart.dto.OrderDetailsResponse;
 import com.example.ekart.dto.OrderResponse;
 import com.example.ekart.dto.OrderItemResponse;
 
+import com.example.ekart.dto.OrderStatusCount;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -51,5 +52,6 @@ public interface OrderRepository {
 
     OrderDetailsResponse getOrderHeaderByOrderId(
             @Param("orderId") int orderId);
+    List<OrderStatusCount> getOrderStatusCounts();
 
 }
