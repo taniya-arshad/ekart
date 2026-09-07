@@ -35,6 +35,7 @@ public class ProductService {
     public void updateProduct(Product product) {
         repo.updateProduct(product);
     }
+    @Cacheable("product")
     public Product getProductById(int id) {
         return repo.getProductById(id);
     }

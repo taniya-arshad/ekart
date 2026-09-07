@@ -199,7 +199,8 @@ function ProductDetails() {
           .then((data) => {
             setReviews(data);
           });
-       fetch(
+
+        fetch(
           `http://localhost:8081/api/reviews/product/${id}/summary`
         )
           .then((res) => res.json())
@@ -209,16 +210,16 @@ function ProductDetails() {
 
       } else if (res.status === 400) {
 
-         showMessage(
-           "❌ You have already reviewed this product."
-         );
+        showMessage(
+          "❌ You have already reviewed this product."
+        );
 
-       } else {
+      } else {
 
-         showMessage(
-           "❌ Failed to add review. Please try again."
-         );
-       }
+        showMessage(
+          "❌ Failed to add review. Please try again."
+        );
+      }
 
     } catch (err) {
 
@@ -254,17 +255,13 @@ function ProductDetails() {
   useEffect(() => {
 
     fetch(
-      "http://localhost:8081/api/products"
+      `http://localhost:8081/api/products/${id}`
     )
       .then((res) => res.json())
       .then((data) => {
 
-        const found = data.find(
-          (p) =>
-            p.id === parseInt(id)
-        );
+        setProduct(data);
 
-        setProduct(found);
       });
 
   }, [id]);
@@ -285,18 +282,18 @@ function ProductDetails() {
   }, [id]);
   useEffect(() => {
 
-  fetch(
-    `http://localhost:8081/api/reviews/product/${id}/summary`
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      setReviewSummary(data);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+    fetch(
+      `http://localhost:8081/api/reviews/product/${id}/summary`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setReviewSummary(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
 
-    }, [id]);
+  }, [id]);
 
   if (!product) {
 
