@@ -1,0 +1,36 @@
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ekart-backend:latest
+    container_name: ekart-backend
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://ekart-mysql:3306/ekart
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      SPRING_DATA_REDIS_HOST: ekart-redis
+      SPRING_DATA_REDIS_PORT: 6379
+    networks:
+      - ekart-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: ekart-frontend:latest
+    container_name: ekart-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - ekart-network
+
+networks:
+  ekart-network:
+    name: ekart-network
+    external: true

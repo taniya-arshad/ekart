@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9df997d4-c097-4ac0-b8bd-45238658ec3f" name="Changes" comment="reviews display on product screen">
+    <list default="true" id="9df997d4-c097-4ac0-b8bd-45238658ec3f" name="Changes" comment="token and user deletion before login session">
+      <change afterPath="$PROJECT_DIR$/ekart/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ekart/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/ekart.log.2026-09-07.0.gz" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,8 +68,8 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/ajame/PROJECT&quot;,
     &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
+    &quot;project.structure.side.proportion&quot;: &quot;0.60209423&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
 }</component>
   <component name="RunAnythingCache">
@@ -130,7 +136,15 @@
       <option name="project" value="LOCAL" />
       <updated>1787485123511</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="token and user deletion before login session">
+      <option name="closed" value="true" />
+      <created>1789581787939</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1789581787943</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -149,6 +163,7 @@
       <path value="$PROJECT_DIR$/ekart" />
     </ignored-roots>
     <MESSAGE value="reviews display on product screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="reviews display on product screen" />
+    <MESSAGE value="token and user deletion before login session" />
+    <option name="LAST_COMMIT_MESSAGE" value="token and user deletion before login session" />
   </component>
 </project>
