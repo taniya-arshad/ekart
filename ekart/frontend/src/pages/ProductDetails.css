@@ -285,3 +285,35 @@
   font-size: 16px;
   font-weight: 600;
 }
+
+/* Back to Home - subtle navigation link */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 14px 0 0 20px;
+  padding: 6px 0;
+  background: transparent;
+  color: #334155;
+  border: none;
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.back-arrow {
+  font-size: 19px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.back-button:hover {
+  background: transparent;
+  color: #0a1e3e;
+}
+
+.back-button:hover .back-arrow {
+  transform: translateX(-3px);
+}

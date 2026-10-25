@@ -311,6 +311,13 @@ return (
           ? "Update Product"
           : "Add Product"}
       </button>
+      <button
+        type="button"
+        className="back-dashboard-button"
+        onClick={() => navigate("/admin/dashboard")}
+      >
+        ← Back to Admin Dashboard
+      </button>
 
     </form>
 

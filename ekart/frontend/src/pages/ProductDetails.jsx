@@ -306,6 +306,15 @@ function ProductDetails() {
 
       <Navbar />
 
+        <button
+          className="back-button"
+          onClick={() => navigate("/home")}
+        >
+          <span className="back-arrow">←</span>
+          <span>Back to Home</span>
+        </button>
+
+
       {message && (
         <div className="success-message">
           {message}

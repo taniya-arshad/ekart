@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9df997d4-c097-4ac0-b8bd-45238658ec3f" name="Changes" comment="token and user deletion before login session">
-      <change afterPath="$PROJECT_DIR$/ekart/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ekart/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/ekart.log.2026-09-07.0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/AddProduct.css" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/AddProduct.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/AddProduct.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/AddProduct.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/MyAddresses.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/MyAddresses.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/ProductDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/Profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/Profile.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
