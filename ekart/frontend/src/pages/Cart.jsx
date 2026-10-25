@@ -160,6 +160,15 @@ function Cart() {
 
       <div className="cart-container">
 
+        <button
+          type="button"
+          className="back-button"
+          onClick={() => navigate("/home")}
+        >
+          <span className="back-arrow">←</span>
+          Back to Home
+        </button>
+
         <h2>Your Cart</h2>
 
         {cart.length === 0 ? (
