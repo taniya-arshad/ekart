@@ -5,11 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9df997d4-c097-4ac0-b8bd-45238658ec3f" name="Changes" comment="token and user deletion before login session">
+      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/model/OrderEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/OrderEventConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/OrderEventProducer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/Cart.css" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/Cart.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/Cart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/Cart.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/MyAddresses.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/MyAddresses.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ekart/frontend/src/pages/Profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/frontend/src/pages/Profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/java/com/example/ekart/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ekart/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ekart/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
