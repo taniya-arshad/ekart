@@ -14,93 +14,154 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminProducts from "./pages/AdminProducts";
 import AddProduct from "./pages/AddProduct";
 import AdminOrders from "./pages/AdminOrders";
+import ProtectedRoute from "./components/ProtectedRoute";
+import AdminRoute from "./components/AdminRoute";
 import "./App.css";
 
 function App() {
 
-return (
+  return (
 
-<Routes>
+    <Routes>
 
-  <Route
-    path="/login"
-    element={<Login />}
-  />
+      {/* Public Routes */}
 
-  <Route
-    path="/register"
-    element={<Register />}
-  />
+      <Route
+        path="/login"
+        element={<Login />}
+      />
 
-  <Route
-    path="/home"
-    element={<Home />}
-  />
-
-  <Route
-    path="/product/:id"
-    element={<ProductDetails />}
-  />
-
-  <Route
-    path="/cart"
-    element={<Cart />}
-  />
-
-  <Route
-    path="/address"
-    element={<Address />}
-  />
-
-  <Route
-    path="/profile"
-    element={<Profile />}
-  />
-
-  <Route
-    path="/orders"
-    element={<Orders />}
-  />
-
-  <Route
-    path="/order/:id"
-    element={<OrderDetails />}
-  />
-
-  <Route
-    path="/my-addresses"
-    element={<MyAddresses />}
-  />
-  <Route
-    path="/admin/dashboard"
-    element={<AdminDashboard />}
-  />
+      <Route
+        path="/register"
+        element={<Register />}
+      />
 
 
+      {/* Protected User Routes */}
 
-  <Route
-    path="/admin/products"
-    element={<AdminProducts />}
-  />
+      <Route
+        path="/home"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
 
-  <Route
-    path="/admin/add-product"
-    element={<AddProduct />}
-  />
+      <Route
+        path="/product/:id"
+        element={
+          <ProtectedRoute>
+            <ProductDetails />
+          </ProtectedRoute>
+        }
+      />
 
-  <Route
-    path="/admin/edit-product/:id"
-    element={<AddProduct />}
-  />
+      <Route
+        path="/cart"
+        element={
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        }
+      />
 
-  <Route
-    path="/admin/orders"
-    element={<AdminOrders />}
-  />
+      <Route
+        path="/address"
+        element={
+          <ProtectedRoute>
+            <Address />
+          </ProtectedRoute>
+        }
+      />
 
-</Routes>
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        }
+      />
 
-);
+      <Route
+        path="/orders"
+        element={
+          <ProtectedRoute>
+            <Orders />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/order/:id"
+        element={
+          <ProtectedRoute>
+            <OrderDetails />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/my-addresses"
+        element={
+          <ProtectedRoute>
+            <MyAddresses />
+          </ProtectedRoute>
+        }
+      />
+
+
+      {/* Protected Admin Routes */}
+
+      <Route
+        path="/admin/dashboard"
+        element={
+          <AdminRoute>
+            <AdminDashboard />
+          </AdminRoute>
+        }
+      />
+
+      <Route
+        path="/admin/products"
+        element={
+          <AdminRoute>
+            <AdminProducts />
+          </AdminRoute>
+        }
+      />
+
+      <Route
+        path="/admin/add-product"
+        element={
+          <AdminRoute>
+            <AddProduct />
+          </AdminRoute>
+        }
+      />
+
+      <Route
+        path="/admin/edit-product/:id"
+        element={
+          <AdminRoute>
+            <AddProduct />
+          </AdminRoute>
+        }
+      />
+
+      <Route
+        path="/admin/orders"
+        element={
+          <AdminRoute>
+            <AdminOrders />
+          </AdminRoute>
+        }
+      />
+
+    </Routes>
+
+  );
 }
 
 export default App;

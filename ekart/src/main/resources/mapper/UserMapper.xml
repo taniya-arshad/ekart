@@ -19,5 +19,40 @@
     SET last_login = NOW()
     WHERE email = #{email}
     </update>
+    <select id="findByEmailAndNotId"
+            resultType="com.example.ekart.model.User">
+
+        SELECT *
+        FROM users
+        WHERE email = #{email}
+        AND id != #{id}
+
+    </select>
+
+    <update id="updateProfile"
+            parameterType="com.example.ekart.model.User">
+
+        UPDATE users
+        SET
+        name = #{name},
+        email = #{email}
+        WHERE id = #{id}
+
+    </update>
+    <update id="updatePassword">
+
+        UPDATE users
+        SET password = #{password}
+        WHERE id = #{id}
+
+    </update>
+    <select id="findById"
+            resultType="com.example.ekart.model.User">
+
+        SELECT *
+        FROM users
+        WHERE id = #{id}
+
+    </select>
 
 </mapper>

@@ -146,3 +146,21 @@
 .address-page-header {
   margin-bottom: 25px;
 }
+.profile-card input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  margin-top: 5px;
+  margin-bottom: 12px;
+
+  border: 1px solid #ccc;
+  border-radius: 6px;
+
+  font-size: 16px;
+  outline: none;
+}
+
+.profile-card input:focus {
+  border-color: #0073bb;
+  box-shadow: 0 0 3px rgba(0, 115, 187, 0.3);
+}

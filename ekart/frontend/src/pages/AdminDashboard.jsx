@@ -39,7 +39,7 @@ useEffect(() => {
 
     } catch (err) {
 
-      console.error(err);
+      console.log(err);
     }
 
   };
@@ -50,32 +50,49 @@ useEffect(() => {
 
 useEffect(() => {
 
-  const fetchOrders = async () => {
+  const fetchOrderCounts = async () => {
 
     try {
 
-      const res = await fetch(
-        "http://localhost:8081/api/orders/admin"
-      );
+      const token =
+        localStorage.getItem("token");
+
+      const res = await fetch("http://localhost:8081/api/orders/admin/counts", {
+                          headers: {
+                            "Authorization": `Bearer ${localStorage.getItem("token")}`
+                          }
+                        });
+
 
       const data = await res.json();
 
-      setTotalOrders(data.length);
+      let total = 0;
+      let placed = 0;
+      let returns = 0;
 
-      const placed =
-        data.filter(
-          (order) =>
-            order.status === "PLACED"
-        ).length;
+      data.forEach((order) => {
 
+        total += order.count;
+
+        if (order.status === "PLACED") {
+
+          placed = order.count;
+
+        }
+
+        if (
+          order.status ===
+          "RETURN_REQUESTED"
+        ) {
+
+          returns = order.count;
+
+        }
+
+      });
+
+      setTotalOrders(total);
       setPlacedOrders(placed);
-
-      const returns =
-        data.filter(
-          (order) =>
-            order.status === "RETURN_REQUESTED"
-        ).length;
-
       setReturnRequests(returns);
 
     } catch (err) {
@@ -85,7 +102,7 @@ useEffect(() => {
 
   };
 
-  fetchOrders();
+  fetchOrderCounts();
 
 }, []);
 

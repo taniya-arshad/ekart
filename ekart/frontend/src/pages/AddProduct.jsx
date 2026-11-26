@@ -117,13 +117,18 @@ try {
     ? "PUT"
     : "POST";
 
+  const token =
+    localStorage.getItem("token");
+
   const res = await fetch(
     url,
     {
       method: method,
       headers: {
         "Content-Type":
-          "application/json"
+          "application/json",
+        "Authorization":
+          `Bearer ${token}`
       },
       body: JSON.stringify(
         product
@@ -305,6 +310,13 @@ return (
         {id
           ? "Update Product"
           : "Add Product"}
+      </button>
+      <button
+        type="button"
+        className="back-dashboard-button"
+        onClick={() => navigate("/admin/dashboard")}
+      >
+        ← Back to Admin Dashboard
       </button>
 
     </form>

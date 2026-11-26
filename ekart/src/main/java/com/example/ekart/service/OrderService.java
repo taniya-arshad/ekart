@@ -1,14 +1,13 @@
+
 package com.example.ekart.service;
 
-import com.example.ekart.dto.OrderDetailsResponse;
-import com.example.ekart.dto.OrderItem;
-import com.example.ekart.dto.OrderItemResponse;
-import com.example.ekart.dto.OrderRequest;
-import com.example.ekart.dto.OrderResponse;
+import com.example.ekart.dto.*;
+import com.example.ekart.model.OrderEvent;
 import com.example.ekart.model.Product;
+import com.example.ekart.model.User;
 import com.example.ekart.repository.OrderRepository;
-
 import com.example.ekart.repository.ProductRepository;
+import com.example.ekart.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,13 +17,19 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
+    private final UserRepository userRepository;
+    private final OrderEventProducer orderEventProducer;
 
     public OrderService(
             OrderRepository orderRepository,
-            ProductRepository productRepository) {
+            ProductRepository productRepository,
+            UserRepository userRepository,
+            OrderEventProducer orderEventProducer) {
 
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
+        this.userRepository = userRepository;
+        this.orderEventProducer = orderEventProducer;
     }
 
     public void placeOrder(OrderRequest request) {
@@ -66,7 +71,17 @@ public class OrderService {
                     remainingStock
             );
         }
+
+        OrderEvent event = new OrderEvent(
+                orderId,
+                request.getUserId(),
+                request.getTotalAmount(),
+                "ORDER_PLACED"
+        );
+
+        orderEventProducer.publishOrderEvent(event);
     }
+
     public List<OrderResponse> getOrdersByUserId(int userId) {
         return orderRepository.getOrdersByUserId(userId);
     }
@@ -88,6 +103,7 @@ public class OrderService {
 
         return orders;
     }
+
     public List<OrderDetailsResponse> getAllOrders() {
 
         List<OrderDetailsResponse> orders =
@@ -106,53 +122,33 @@ public class OrderService {
 
         return orders;
     }
-    public void updateOrderStatus(
-            int orderId) {
+
+    public void updateOrderStatus(int orderId) {
 
         String currentStatus =
-                orderRepository
-                        .getOrderStatus(
-                                orderId
-                        );
+                orderRepository.getOrderStatus(orderId);
 
-        String nextStatus =
-                currentStatus;
+        String nextStatus = currentStatus;
 
-        if ("PLACED".equals(
-                currentStatus)) {
-
-            nextStatus =
-                    "SHIPPED";
-
-        } else if (
-                "SHIPPED".equals(
-                        currentStatus)) {
-
-            nextStatus =
-                    "DELIVERED";
+        if ("PLACED".equals(currentStatus)) {
+            nextStatus = "SHIPPED";
+        } else if ("SHIPPED".equals(currentStatus)) {
+            nextStatus = "DELIVERED";
         }
 
-        orderRepository
-                .updateOrderStatus(
-                        orderId,
-                        nextStatus
-                );
+        orderRepository.updateOrderStatus(orderId, nextStatus);
     }
-    ```java
+
     public void cancelOrder(int orderId) {
 
         String currentStatus =
-                orderRepository.getOrderStatus(
-                        orderId
-                );
+                orderRepository.getOrderStatus(orderId);
 
         if ("PLACED".equals(currentStatus)
                 || "SHIPPED".equals(currentStatus)) {
 
             List<OrderItemResponse> items =
-                    orderRepository.getOrderItemsByOrderId(
-                            orderId
-                    );
+                    orderRepository.getOrderItemsByOrderId(orderId);
 
             for (OrderItemResponse item : items) {
 
@@ -171,57 +167,36 @@ public class OrderService {
                 );
             }
 
-            orderRepository.updateOrderStatus(
-                    orderId,
-                    "CANCELLED"
-            );
+            orderRepository.updateOrderStatus(orderId, "CANCELLED");
 
         } else {
-
-            throw new RuntimeException(
-                    "Order cannot be cancelled"
-            );
+            throw new RuntimeException("Order cannot be cancelled");
         }
     }
+
     public void returnOrder(int orderId) {
 
         String currentStatus =
-                orderRepository.getOrderStatus(
-                        orderId
-                );
+                orderRepository.getOrderStatus(orderId);
 
         if ("DELIVERED".equals(currentStatus)) {
-
-            orderRepository.updateOrderStatus(
-                    orderId,"RETURN_REQUESTED"
-            );
-
+            orderRepository.updateOrderStatus(orderId, "RETURN_REQUESTED");
         } else {
-
-            throw new RuntimeException(
-                    "Order cannot be returned"
-            );
+            throw new RuntimeException("Order cannot be returned");
         }
     }
+
     public void completeReturn(int orderId) {
 
         String currentStatus =
-                orderRepository.getOrderStatus(
-                        orderId
-                );
+                orderRepository.getOrderStatus(orderId);
 
-        if (!"RETURN_REQUESTED".equals(
-                currentStatus)) {
-
-            throw new RuntimeException(
-                    "Order is not ready for return"
-            );
+        if (!"RETURN_REQUESTED".equals(currentStatus)) {
+            throw new RuntimeException("Order is not ready for return");
         }
 
         List<OrderItemResponse> items =
-                orderRepository.getOrderItemsByOrderId(
-                        orderId
-                );
+                orderRepository.getOrderItemsByOrderId(orderId);
 
         for (OrderItemResponse item : items) {
 
@@ -240,25 +215,18 @@ public class OrderService {
             );
         }
 
-        orderRepository.updateOrderStatus(
-                orderId,"RETURNED"
-        );
-
+        orderRepository.updateOrderStatus(orderId, "RETURNED");
     }
-    public OrderDetailsResponse getOrderDetailsByOrderId(
-            int orderId) {
+
+    public OrderDetailsResponse getOrderDetailsByOrderId(int orderId) {
 
         OrderDetailsResponse order =
-                orderRepository.getOrderHeaderByOrderId(
-                        orderId
-                );
+                orderRepository.getOrderHeaderByOrderId(orderId);
 
         if (order != null) {
 
             List<OrderItemResponse> items =
-                    orderRepository.getOrderItemsByOrderId(
-                            orderId
-                    );
+                    orderRepository.getOrderItemsByOrderId(orderId);
 
             order.setItems(items);
         }
@@ -266,4 +234,14 @@ public class OrderService {
         return order;
     }
 
+    public boolean isUserOwner(int userId, String email) {
+
+        User user = userRepository.findByEmail(email);
+
+        return user != null && user.getId() == userId;
+    }
+
+    public List<OrderStatusCount> getOrderStatusCounts() {
+        return orderRepository.getOrderStatusCounts();
+    }
 }

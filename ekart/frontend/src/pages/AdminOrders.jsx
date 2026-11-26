@@ -36,8 +36,17 @@ function AdminOrders() {
 
     try {
 
+      const token =
+        localStorage.getItem("token");
+
       const res = await fetch(
-        "http://localhost:8081/api/orders/admin"
+        "http://localhost:8081/api/orders/admin",
+        {
+          headers: {
+            "Authorization":
+              `Bearer ${token}`
+          }
+        }
       );
 
       const data = await res.json();
@@ -524,14 +533,18 @@ function AdminOrders() {
                 <button
                   className="status-btn"
                   onClick={async () => {
+                    const token =
+                        localStorage.getItem("token");
 
-                    await fetch(
-                      `http://localhost:8081/api/orders/admin/status/${order.orderId}`,
-                      {
-                        method: "PUT"
-                      }
-                    );
-
+                      await fetch(
+                        `http://localhost:8081/api/orders/admin/status/${order.orderId}`,
+                        {
+                          method: "PUT",
+                          headers: {
+                            "Authorization": `Bearer ${token}`
+                          }
+                        }
+                      );
                     fetchOrders();
 
                   }}
@@ -547,12 +560,18 @@ function AdminOrders() {
                   className="status-btn"
                   onClick={async () => {
 
-                    await fetch(
-                      `http://localhost:8081/api/orders/admin/status/${order.orderId}`,
-                      {
-                        method: "PUT"
-                      }
-                    );
+                    const token =
+                        localStorage.getItem("token");
+
+                      await fetch(
+                        `http://localhost:8081/api/orders/admin/status/${order.orderId}`,
+                        {
+                          method: "PUT",
+                          headers: {
+                            "Authorization": `Bearer ${token}`
+                          }
+                        }
+                      );
 
                     fetchOrders();
 
@@ -570,10 +589,16 @@ function AdminOrders() {
 
                      try {
 
+                       const token =
+                         localStorage.getItem("token");
+
                        const res = await fetch(
                          `http://localhost:8081/api/orders/admin/return/${order.orderId}`,
                          {
-                           method: "PUT"
+                           method: "PUT",
+                           headers: {
+                             "Authorization": `Bearer ${token}`
+                           }
                          }
                        );
 

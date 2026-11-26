@@ -163,5 +163,15 @@
         WHERE address_id = #{addressId}
 
     </select>
+    <select id="getOrderStatusCounts"
+            resultType="com.example.ekart.dto.OrderStatusCount">
+
+        SELECT
+        status,
+        COUNT(*) AS count
+        FROM orders
+        GROUP BY status
+
+    </select>
 
 </mapper>
